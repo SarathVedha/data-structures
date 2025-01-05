@@ -66,7 +66,7 @@ public class ArrayListQueueDS<T> {
 			System.out.println(arr[0]);
 			for (int i = 1; i <= last; i++) {
 
-				arr[1 - 1] = arr[i];
+				arr[i - 1] = arr[i];
 			}
 			last--;
 		}
@@ -98,10 +98,19 @@ public class ArrayListQueueDS<T> {
 
 		ArrayListQueueDS<String> arrayListQueueDS = new ArrayListQueueDS<>();
 		arrayListQueueDS.display();
-		arrayListQueueDS.enQueue("Vedha");
-		arrayListQueueDS.display();
 		arrayListQueueDS.enQueue("Master");
 		arrayListQueueDS.display();
+		arrayListQueueDS.enQueue("Master0");
+		arrayListQueueDS.display();
+		arrayListQueueDS.deQueue();
+		arrayListQueueDS.display();
+
+		arrayListQueueDS.enQueue("Master1");
+		arrayListQueueDS.enQueue("Master2");
+		arrayListQueueDS.enQueue("Master3");
+		arrayListQueueDS.enQueue("Master4");
+		arrayListQueueDS.display();
+		arrayListQueueDS.deQueue();
 		arrayListQueueDS.deQueue();
 		arrayListQueueDS.display();
 	}

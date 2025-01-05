@@ -38,13 +38,12 @@ public class LinkedListQueueDS<T> {
 		if (head == null) {
 
 			head = newNode;
-			tail = newNode;
-		} else {
+        } else {
 
 			tail.next = newNode;
-			tail = newNode;
-		}
-	}
+        }
+        tail = newNode;
+    }
 
 	public void deQueue() {
 
@@ -81,9 +80,6 @@ public class LinkedListQueueDS<T> {
 
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 
 		LinkedListQueueDS<String> linkedListQueueDS = new LinkedListQueueDS<>();

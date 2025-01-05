@@ -11,8 +11,9 @@ import java.util.Arrays;
  */
 public class LinearSearchDS {
 
-	// TimeComplecity for linear search on by one so worst case O(1) and best case
+	// TimeComplexity for linear search on by one so worst case O(1) and best case
 	// is O(1) if the target element in first position.
+	// for both sorted and unsorted array.
 
 	public static int find(int[] arr, int value) {
 
@@ -29,13 +30,13 @@ public class LinearSearchDS {
 
 	public static boolean contains(int[] arr, int target) {
 
-		for (int i = 0; i < arr.length; i++) {
+        for (int j : arr) {
 
-			if (arr[i] == target) {
+            if (j == target) {
 
-				return true;
-			}
-		}
+                return true;
+            }
+        }
 
 		return false;
 	}
@@ -85,16 +86,16 @@ public class LinearSearchDS {
 
 	public static boolean contains(int[][] arrs, int target) {
 
-		for (int row = 0; row < arrs.length; row++) {
+        for (int[] arr : arrs) {
 
-			for (int coln = 0; coln < arrs[row].length; coln++) {
+            for (int i : arr) {
 
-				if (arrs[row][coln] == target) {
+                if (i == target) {
 
-					return true;
-				}
-			}
-		}
+                    return true;
+                }
+            }
+        }
 
 		return false;
 	}
@@ -111,11 +112,10 @@ public class LinearSearchDS {
 		System.out.println(contains);
 
 		String s = "Vedha";
-		String finalValue = s != null && !s.isEmpty() && !s.isBlank() ? s : "Empty";
-		int find2 = LinearSearchDS.find(finalValue, 'a');
+		int find2 = LinearSearchDS.find(s, 'a');
 		System.out.println(find2);
 
-		boolean contains2 = LinearSearchDS.contains(finalValue, 'V');
+		boolean contains2 = LinearSearchDS.contains(s, 'V');
 		System.out.println(contains2);
 
 //		int[][] arrs = new int[][] { { 1, 2 }, { 3, 4 } };

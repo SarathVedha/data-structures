@@ -34,25 +34,18 @@ public class ArrayListStackDS<T> {
 		if (top == -1) {
 
 			System.out.println("Empty Stack");
-			return data;
-		} else {
+        } else {
 
 			data = arr[top--]; // --top after returning top and decrementing
 			System.out.println(data);
-			return data;
-		}
+        }
+        return data;
 
-	}
+    }
 
 	public boolean isEmpty() {
 
-		if (top == -1) {
-
-			return true;
-		} else {
-
-			return false;
-		}
+        return top == -1;
 	}
 
 	public T peek() {
@@ -61,14 +54,13 @@ public class ArrayListStackDS<T> {
 		if (top == -1) {
 
 			System.out.println("Empty Stack");
-			return data;
-		} else {
+        } else {
 
 			data = arr[top];
 			System.out.println(data);
-			return data;
-		}
-	}
+        }
+        return data;
+    }
 
 	public void display() {
 
@@ -78,16 +70,18 @@ public class ArrayListStackDS<T> {
 	public static void main(String[] args) {
 
 		ArrayListStackDS<String> arrayListStackDS = new ArrayListStackDS<>();
+		System.out.println("arrayListStackDS.isEmpty() = " + arrayListStackDS.isEmpty());
 		arrayListStackDS.push("Vedha");
 		arrayListStackDS.push("Vedha1");
 		arrayListStackDS.push("Vedha2");
 		arrayListStackDS.push("Vedha3");
-		arrayListStackDS.peek();
-		arrayListStackDS.pop();
+		System.out.println("arrayListStackDS.peek() = " + arrayListStackDS.peek());
+		System.out.println("arrayListStackDS.pop() = " + arrayListStackDS.pop());
 		arrayListStackDS.push("Vedha3");
 		arrayListStackDS.peek();
+		System.out.println("arrayListStackDS.pop() = " + arrayListStackDS.pop());
+		System.out.println("arrayListStackDS.pop() = " + arrayListStackDS.pop());
 		arrayListStackDS.display();
-
 	}
 
 }
