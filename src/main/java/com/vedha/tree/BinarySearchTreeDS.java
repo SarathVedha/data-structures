@@ -20,6 +20,15 @@ public class BinarySearchTreeDS<T> {
             this.left = null;
             this.right = null;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                   "data=" + data +
+                   ", left=" + left +
+                   ", right=" + right +
+                   '}';
+        }
     }
 
     int insertCount;
@@ -89,6 +98,11 @@ public class BinarySearchTreeDS<T> {
 
     public void displayTree() {
 
+        System.out.println("this.root = " + this.root);
+    }
+
+    public void displayTreeInOrder() {
+
         System.out.print("Data: { ");
 
         inOrder(this.root);
@@ -110,6 +124,53 @@ public class BinarySearchTreeDS<T> {
         }
     }
 
+    public void delete (T data) {
+
+       delete(this.root, data);
+    }
+
+    private Node delete(Node root, T data) {
+
+        if (root == null) {
+
+            return null;
+        }
+
+        if ((int) root.data < (int) data) {
+
+            root.right = delete(root.right, data);
+        } else if ((int) root.data > (int) data) {
+
+            root.left = delete(root.left, data);
+        } else {
+
+            if (root.left == null) {
+
+                return root.right;
+            } else if (root.right == null) {
+
+                return root.left;
+            } else {
+
+                root.data = min(root.right);
+                root.right = delete(root.right, root.data);
+            }
+        }
+
+        return root;
+    }
+
+    // Left side will be min value.
+    private T min(Node root) {
+
+        T minVal = root.data;
+        while (root.left != null) {
+
+            minVal = root.data;
+            root = root.left;
+        }
+        return minVal;
+    }
 
     public static void main(String[] args) {
 
@@ -121,12 +182,17 @@ public class BinarySearchTreeDS<T> {
         integerBinarySearchTreeDS.add(40);
         integerBinarySearchTreeDS.add(100);
 
-        integerBinarySearchTreeDS.displayTree();
+        integerBinarySearchTreeDS.displayTreeInOrder();
 
         System.out.println("search = " + integerBinarySearchTreeDS.search(60));
         System.out.println("contains = " + integerBinarySearchTreeDS.contains(100));
 
         System.out.println("search = " + integerBinarySearchTreeDS.search(150));
         System.out.println("contains = " + integerBinarySearchTreeDS.contains(200));
+
+        integerBinarySearchTreeDS.delete(101);
+
+        integerBinarySearchTreeDS.displayTreeInOrder();
+        integerBinarySearchTreeDS.displayTree();
     }
 }

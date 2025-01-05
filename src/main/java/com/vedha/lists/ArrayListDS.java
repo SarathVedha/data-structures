@@ -115,7 +115,7 @@ class DynamicArray<T> implements Iterable<T> { // Iterable -> for-each
 
 		if (0 < size) {
 
-			for (int i = 0 + 1; i < size; i++) {
+			for (int i = 1; i < size; i++) {
 
 				arr[i - 1] = arr[i];
 			}
@@ -164,7 +164,7 @@ class DynamicArray<T> implements Iterable<T> { // Iterable -> for-each
 		}
 	}
 
-	public void serach(T data) {
+	public void search(T data) {
 
 		int pos = -1;
 		for (int i = 0; i < size; i++) {
@@ -183,10 +183,11 @@ class DynamicArray<T> implements Iterable<T> { // Iterable -> for-each
 		boolean flag = false;
 		for (int i = 0; i < size; i++) {
 
-			if (data.equals(arr[i])) {
+            if (data.equals(arr[i])) {
 
-				flag = true;
-			}
+                flag = true;
+                break;
+            }
 		}
 
 		System.out.println("contains : " + flag);
@@ -239,13 +240,7 @@ class DynamicArray<T> implements Iterable<T> { // Iterable -> for-each
 			@Override
 			public boolean hasNext() {
 
-				if (index < size) {
-
-					return true;
-				} else {
-
-					return false;
-				}
+                return index < size;
 			}
 
 			@Override
@@ -280,18 +275,15 @@ public class ArrayListDS {
 
 		array.display();
 
-		Iterator<String> iterator = array.iterator();
-		while (iterator.hasNext()) {
-			String string = (String) iterator.next();
-			System.out.println(string);
-
-		}
+        for (String string : array) {
+            System.out.println(string);
+        }
 
 		array.contains("vedha");
 
 		array.get(0);
 
-		array.serach("Master");
+		array.search("Master");
 
 		// Using Iterator
 		for (String string : array) {

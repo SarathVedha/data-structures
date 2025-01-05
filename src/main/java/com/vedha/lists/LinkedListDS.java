@@ -248,10 +248,11 @@ public class LinkedListDS<T> implements Iterable<T> {
 		Node temp = head;
 		while (temp != null) {
 
-			if (temp.data.equals(data)) {
+            if (temp.data.equals(data)) {
 
-				flag = true;
-			}
+                flag = true;
+                break;
+            }
 			temp = temp.next;
 		}
 
@@ -315,30 +316,24 @@ public class LinkedListDS<T> implements Iterable<T> {
 	@Override
 	public Iterator<T> iterator() {
 
-		return new Iterator<T>() {
+		return new Iterator<>() {
 
-			Node temp = head;
+            Node temp = head;
 
-			@Override
-			public boolean hasNext() {
+            @Override
+            public boolean hasNext() {
 
-				if (temp != null) {
+                return temp != null;
+            }
 
-					return true;
-				} else {
+            @Override
+            public T next() {
 
-					return false;
-				}
-			}
-
-			@Override
-			public T next() {
-
-				T val = temp.data;
-				temp = temp.next;
-				return val;
-			}
-		};
+                T val = temp.data;
+                temp = temp.next;
+                return val;
+            }
+        };
 	}
 
 	public static void main(String[] args) {

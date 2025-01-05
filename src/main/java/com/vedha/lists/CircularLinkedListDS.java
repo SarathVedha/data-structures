@@ -149,9 +149,6 @@ public class CircularLinkedListDS<T> {
 		}
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 
 		CircularLinkedListDS<String> circularLinkedListDS = new CircularLinkedListDS<>();
