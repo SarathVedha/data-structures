@@ -124,9 +124,14 @@ public class BinarySearchTreeDS<T> {
         }
     }
 
-    public void delete (T data) {
+    private boolean isDelete = false;
 
-       delete(this.root, data);
+    public boolean delete(T data) {
+
+        isDelete = false;
+        this.root = delete(this.root, data);
+
+        return isDelete;
     }
 
     private Node delete(Node root, T data) {
@@ -146,14 +151,17 @@ public class BinarySearchTreeDS<T> {
 
             if (root.left == null) {
 
+                isDelete = true;
                 return root.right;
             } else if (root.right == null) {
 
+                isDelete = true;
                 return root.left;
             } else {
 
                 root.data = min(root.right);
                 root.right = delete(root.right, root.data);
+                isDelete = true;
             }
         }
 
@@ -190,7 +198,8 @@ public class BinarySearchTreeDS<T> {
         System.out.println("search = " + integerBinarySearchTreeDS.search(150));
         System.out.println("contains = " + integerBinarySearchTreeDS.contains(200));
 
-        integerBinarySearchTreeDS.delete(101);
+        System.out.println("delete = " + integerBinarySearchTreeDS.delete(200));
+        System.out.println("delete = " + integerBinarySearchTreeDS.delete(50));
 
         integerBinarySearchTreeDS.displayTreeInOrder();
         integerBinarySearchTreeDS.displayTree();
