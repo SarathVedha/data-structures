@@ -4,6 +4,11 @@ import java.util.Arrays;
 
 public class MergeSortDS {
 
+    // MergeSort is a Divide and Conquer algorithm.
+    // Best for sorting-linked lists.
+    // Time Complexity: O(n log n) in all cases (worst, average and best),
+    // as merge sort always divides the array into two halves and takes linear time to merge two halves.
+    // It requires O(n) extra space for the temporary arrays.
     public static int[] sortAsc(int[] arr) {
 
         if (arr.length == 1) {
@@ -47,9 +52,6 @@ public class MergeSortDS {
         return joined;
     }
 
-    // MergeSort Time Complexity: O(n log n) in all cases (worst, average and best),
-    // as merge sort always divides the array into two halves and takes linear time to merge two halves.
-    // It requires O(n) extra space for the temporary arrays.
     public static int[] optimizedSortASC(int[] arr) {
 
         optimizedSortASC(arr, 0, arr.length);

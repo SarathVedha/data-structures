@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class QuickSortDS {
 
-    // Quick Sort Algorithm
+    // Quick Sort Algorithm Best for Array
     // Time Complexity: O(n log n) - Best, Average, Worst Case Scenario
     // Space Complexity: O(log n) - Best, Average, Worst Case Scenario (Recursion) - In-Place
     public static int[] quickSortASC(int[] arr) {
