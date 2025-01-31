@@ -4,38 +4,39 @@ package com.vedha.tree;
 public class AVLTreeDS<T> {
 
     Node root;
-
+    int insertCount;
+    int insertMethodCount;
+    private boolean isDelete = false;
     public AVLTreeDS(T initialData) {
 
         this.root = new Node(initialData);
     }
 
-    public class Node {
+    public static void main(String[] args) {
 
-        T data;
-        Node left, right;
-        int height;
+        AVLTreeDS<Integer> avlTreeDS = new AVLTreeDS<>(50);
+        avlTreeDS.add(20);
+        avlTreeDS.add(60);
+        avlTreeDS.add(10);
+        avlTreeDS.add(30);
+        avlTreeDS.add(40);
 
-        public Node(T data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-            this.height = 0;
-        }
+        avlTreeDS.displayTreeInOrder();
+        avlTreeDS.displayTree();
 
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "data=" + data +
-                    ", left=" + left +
-                    ", right=" + right +
-                    ", height=" + height +
-                    '}';
-        }
+        System.out.println("search = " + avlTreeDS.search(60));
+        System.out.println("contains = " + avlTreeDS.contains(100));
+
+        System.out.println("search = " + avlTreeDS.search(150));
+        System.out.println("contains = " + avlTreeDS.contains(200));
+
+        System.out.println("delete = " + avlTreeDS.delete(200));
+        System.out.println("delete = " + avlTreeDS.delete(50));
+
+        avlTreeDS.displayTreeInOrder();
+        avlTreeDS.displayTreeDescOrder();
+        avlTreeDS.displayTree();
     }
-
-    int insertCount;
-    int insertMethodCount;
 
     public void add(T data) {
 
@@ -210,7 +211,29 @@ public class AVLTreeDS<T> {
         }
     }
 
-    private boolean isDelete = false;
+    public void displayTreeDescOrder() {
+
+        System.out.print("Data: { ");
+
+        descOrder(this.root);
+
+        System.out.println("}");
+    }
+
+    // In BinarySearchTreeDS lowest element will be added in the left node,
+    // and the greatest element will be in the right node.
+    // DescOrder Will walk through the right side first, so descending order data will come.
+    private void descOrder(Node root) {
+
+        if (root != null) {
+
+            // Custom Order
+            // descOrder ->  Right, Root, Left
+            descOrder(root.right);
+            System.out.print(root.data + ", ");
+            descOrder(root.left);
+        }
+    }
 
     public boolean delete(T data) {
 
@@ -266,28 +289,27 @@ public class AVLTreeDS<T> {
         return minVal;
     }
 
-    public static void main(String[] args) {
+    public class Node {
 
-        AVLTreeDS<Integer> avlTreeDS = new AVLTreeDS<>(50);
-        avlTreeDS.add(20);
-        avlTreeDS.add(60);
-        avlTreeDS.add(10);
-        avlTreeDS.add(30);
-        avlTreeDS.add(40);
+        T data;
+        Node left, right;
+        int height;
 
-        avlTreeDS.displayTreeInOrder();
-        avlTreeDS.displayTree();
+        public Node(T data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+            this.height = 0;
+        }
 
-        System.out.println("search = " + avlTreeDS.search(60));
-        System.out.println("contains = " + avlTreeDS.contains(100));
-
-        System.out.println("search = " + avlTreeDS.search(150));
-        System.out.println("contains = " + avlTreeDS.contains(200));
-
-        System.out.println("delete = " + avlTreeDS.delete(200));
-        System.out.println("delete = " + avlTreeDS.delete(50));
-
-        avlTreeDS.displayTreeInOrder();
-        avlTreeDS.displayTree();
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data=" + data +
+                    ", left=" + left +
+                    ", right=" + right +
+                    ", height=" + height +
+                    '}';
+        }
     }
 }

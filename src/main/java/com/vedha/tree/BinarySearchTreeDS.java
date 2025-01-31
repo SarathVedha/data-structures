@@ -4,35 +4,39 @@ package com.vedha.tree;
 public class BinarySearchTreeDS<T> {
 
     Node root;
-
+    int insertCount;
+    int insertMethodCount;
+    private boolean isDelete = false;
     public BinarySearchTreeDS(T initialData) {
 
         this.root = new Node(initialData);
     }
 
-    public class Node {
+    public static void main(String[] args) {
 
-        T data;
-        Node left, right;
+        BinarySearchTreeDS<Integer> integerBinarySearchTreeDS = new BinarySearchTreeDS<>(50);
+        integerBinarySearchTreeDS.add(20);
+        integerBinarySearchTreeDS.add(60);
+        integerBinarySearchTreeDS.add(10);
+        integerBinarySearchTreeDS.add(30);
+        integerBinarySearchTreeDS.add(40);
 
-        public Node(T data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
+        integerBinarySearchTreeDS.displayTreeInOrder();
+        integerBinarySearchTreeDS.displayTree();
 
-        @Override
-        public String toString() {
-            return "Node{" +
-                   "data=" + data +
-                   ", left=" + left +
-                   ", right=" + right +
-                   '}';
-        }
+        System.out.println("search = " + integerBinarySearchTreeDS.search(60));
+        System.out.println("contains = " + integerBinarySearchTreeDS.contains(100));
+
+        System.out.println("search = " + integerBinarySearchTreeDS.search(150));
+        System.out.println("contains = " + integerBinarySearchTreeDS.contains(200));
+
+        System.out.println("delete = " + integerBinarySearchTreeDS.delete(200));
+        System.out.println("delete = " + integerBinarySearchTreeDS.delete(50));
+
+        integerBinarySearchTreeDS.displayTreeInOrder();
+        integerBinarySearchTreeDS.displayTreeDescOrder();
+        integerBinarySearchTreeDS.displayTree();
     }
-
-    int insertCount;
-    int insertMethodCount;
 
     public void add(T data) {
 
@@ -124,7 +128,29 @@ public class BinarySearchTreeDS<T> {
         }
     }
 
-    private boolean isDelete = false;
+    public void displayTreeDescOrder() {
+
+        System.out.print("Data: { ");
+
+        descOrder(this.root);
+
+        System.out.println("}");
+    }
+
+    // In BinarySearchTreeDS lowest element will be added in the left node,
+    // and the greatest element will be in the right node.
+    // DescOrder Will walk through the right side first, so descending order data will come.
+    private void descOrder(Node root) {
+
+        if (root != null) {
+
+            // Custom Order
+            // descOrder ->  Right, Root, Left
+            descOrder(root.right);
+            System.out.print(root.data + ", ");
+            descOrder(root.left);
+        }
+    }
 
     public boolean delete(T data) {
 
@@ -180,28 +206,24 @@ public class BinarySearchTreeDS<T> {
         return minVal;
     }
 
-    public static void main(String[] args) {
+    public class Node {
 
-        BinarySearchTreeDS<Integer> integerBinarySearchTreeDS = new BinarySearchTreeDS<>(50);
-        integerBinarySearchTreeDS.add(20);
-        integerBinarySearchTreeDS.add(60);
-        integerBinarySearchTreeDS.add(10);
-        integerBinarySearchTreeDS.add(30);
-        integerBinarySearchTreeDS.add(40);
+        T data;
+        Node left, right;
 
-        integerBinarySearchTreeDS.displayTreeInOrder();
-        integerBinarySearchTreeDS.displayTree();
+        public Node(T data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
 
-        System.out.println("search = " + integerBinarySearchTreeDS.search(60));
-        System.out.println("contains = " + integerBinarySearchTreeDS.contains(100));
-
-        System.out.println("search = " + integerBinarySearchTreeDS.search(150));
-        System.out.println("contains = " + integerBinarySearchTreeDS.contains(200));
-
-        System.out.println("delete = " + integerBinarySearchTreeDS.delete(200));
-        System.out.println("delete = " + integerBinarySearchTreeDS.delete(50));
-
-        integerBinarySearchTreeDS.displayTreeInOrder();
-        integerBinarySearchTreeDS.displayTree();
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data=" + data +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
     }
 }

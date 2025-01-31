@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.sort;
 
@@ -11,65 +11,73 @@ import java.util.Arrays;
  */
 public class SelectionSortDS {
 
-	// Time Complexity for Selection Sort is O(n2) because of two loops
-	public static int[] sortAsc(int[] array) {
+    // Time Complexity for Selection Sort is O(n2) because of two loops and space complexity is O(1)
+    public static void sortAsc(int[] array) {
 
-		for (int i = 0; i < array.length; i++) { // fix the position
+        for (int i = 0; i < array.length; i++) { // fix the position
 
-			int minValue = array[i];
-			int minIndex = i;
+            int minValue = array[i];
 
-			for (int j = i; j < array.length; j++) { // get minimum value
+            int minIndex = i;
 
-				if (array[j] < minValue) {
+            // get minimum value
+            for (int j = i; j < array.length; j++) { // get minimum value
 
-					minValue = array[j];
-					minIndex = j;
-				}
-			}
+                if (array[j] < minValue) {
 
-			// swap
-			int temp = array[i];
-			array[i] = minValue;
-			array[minIndex] = temp;
-		}
-		return array;
-	}
+                    minValue = array[j];
+                    minIndex = j;
+                }
+            }
 
-	public static int[] sortDesc(int[] array) {
+            // swap
+            int temp = array[i];
+            array[i] = minValue;
+            array[minIndex] = temp;
+        }
+    }
 
-		for (int i = 0; i < array.length; i++) { // fix position
+    public static int[] sortDesc(int[] array) {
 
-			int maxVal = array[i];
-			int maxIndex = i;
+        for (int i = 0; i < array.length; i++) { // fix position
 
-			for (int j = i; j < array.length; j++) { // get max value
+            int maxVal = array[i];
+            int maxIndex = i;
 
-				if (array[j] > maxVal) {
+            // get max value
+            for (int j = i; j < array.length; j++) { // get max value
 
-					maxVal = array[j];
-					maxIndex = j;
-				}
-			}
+                if (array[j] > maxVal) {
 
-			// swap
-			int temp = array[i];
-			array[i] = maxVal;
-			array[maxIndex] = temp;
-		}
+                    maxVal = array[j];
+                    maxIndex = j;
+                }
+            }
 
-		return array;
-	}
+            // swap
+            int temp = array[i];
+            array[i] = maxVal;
+            array[maxIndex] = temp;
+        }
 
-	public static void main(String[] args) {
+        return array;
+    }
 
-		int[] arr = { 10, 3, 26, 5, 15, 22 };
-		SelectionSortDS.sortAsc(arr);
-		System.out.println(Arrays.toString(arr));
+    public static void main(String[] args) {
 
-		int[] arr2 = { 10, 3, 26, 5, 15, 22 };
-		SelectionSortDS.sortDesc(arr2);
-		System.out.println(Arrays.toString(arr2));
-	}
+        int[] arr = {10, 3, 26, 5, 15, 22};
+        SelectionSortDS.sortAsc(arr);
+        System.out.println(Arrays.toString(arr));
+
+        int[] arr2 = {10, 3, 26, 5, 15, 22};
+        System.out.println(Arrays.toString(arr2) + ", HashCode: " + arr2.hashCode());
+        System.out.println(Arrays.hashCode(arr2)); // hashcode of array internal elements (not the array object)
+        System.out.println(System.identityHashCode(arr2)); // hashcode of an array object (not the internal elements)
+
+        int[] sorted = SelectionSortDS.sortDesc(arr2);
+        System.out.println(Arrays.toString(sorted) + ", HashCode: " + sorted.hashCode());
+        System.out.println(Arrays.hashCode(sorted));
+        System.out.println(System.identityHashCode(sorted));
+    }
 
 }

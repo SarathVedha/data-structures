@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.lists;
 
@@ -11,382 +11,393 @@ import java.util.Iterator;
  */
 public class DoublyLinkedListDS<T> implements Iterable<T> {
 
-	Node head;
-	Node tail;
+    Node head;
+    Node tail;
 
-	public DoublyLinkedListDS() {
+    public DoublyLinkedListDS() {
 
-		head = null;
-		tail = null;
+        head = null;
+        tail = null;
 
-	}
+    }
 
-	class Node {
+    public static void main(String[] args) {
 
-		T data;
-		Node next;
-		Node prev;
+        DoublyLinkedListDS<String> linList = new DoublyLinkedListDS<String>();
+        linList.insertAtBegining("Vedha1");
+        linList.insertAtLast("Vedha2");
+        linList.insertAtBegining("Vedha");
 
-		public Node(T val) {
+        linList.display();
 
-			data = val;
-			next = null;
-			prev = null;
+        linList.reverse();
 
-		}
-	}
+        linList.display();
 
-	public void insertAtBegining(T data) {
+        linList.displayReverse();
 
-		Node newNode = new Node(data);
+        linList.display();
 
-		if (head == null) {
+        linList.reverse();
 
-			head = newNode;
-			tail = newNode;
-		} else {
+        linList.display();
 
-			head.prev = newNode;
-			newNode.next = head;
-			head = newNode;
+        linList.size();
+        linList.contains("Vedha5");
 
-		}
-	}
+    }
 
-	public void insertAtPosition(int pos, T data) {
+    public void insertAtBegining(T data) {
 
-		try {
+        Node newNode = new Node(data);
 
-			if (pos >= 0) {
+        if (head == null) {
 
-				if (pos == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
 
-					insertAtBegining(data);
-				} else {
+            head.prev = newNode;
+            newNode.next = head;
+            head = newNode;
 
-					Node newNode = new Node(data);
-					Node temp = head;
-					for (int i = 1; i < pos; i++) {
+        }
+    }
 
-						temp = temp.next;
-					}
+    public void insertAtPosition(int pos, T data) {
 
-					newNode.prev = temp;
-					newNode.next = temp.next;
+        try {
 
-					if (temp == tail) {
+            if (pos >= 0) {
 
-						tail = newNode;
-						temp.next = newNode;
-					} else {
+                if (pos == 0) {
 
-						temp.next.prev = newNode;
-						temp.next = newNode;
-					}
+                    insertAtBegining(data);
+                } else {
 
-				}
+                    Node newNode = new Node(data);
+                    Node temp = head;
+                    for (int i = 1; i < pos; i++) {
 
-			} else {
+                        temp = temp.next;
+                    }
 
-				System.out.println("Invalid Position : " + pos);
-			}
-		} catch (Exception e) {
+                    newNode.prev = temp;
+                    newNode.next = temp.next;
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
+                    if (temp == tail) {
 
-	}
+                        tail = newNode;
+                        temp.next = newNode;
+                    } else {
 
-	public void insertAtLast(T data) {
+                        temp.next.prev = newNode;
+                        temp.next = newNode;
+                    }
 
-		if (head == null) {
+                }
 
-			insertAtBegining(data);
-		} else {
+            } else {
 
-			Node newNode = new Node(data);
-			Node temp = tail;
-			newNode.prev = temp;
-			temp.next = newNode;
-			tail = newNode;
-		}
-	}
+                System.out.println("Invalid Position : " + pos);
+            }
+        } catch (Exception e) {
 
-	public void deleteAtBegining() {
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
 
-		if (head == null) {
+    }
 
-			System.out.println("Empty List");
-		} else {
+    public void insertAtLast(T data) {
 
-			Node temp = head;
-			head = temp.next;
+        if (head == null) {
 
-			if (head == null) {
+            insertAtBegining(data);
+        } else {
 
-				tail = null;
-			} else {
+            Node newNode = new Node(data);
+            Node temp = tail;
+            newNode.prev = temp;
+            temp.next = newNode;
+            tail = newNode;
+        }
+    }
 
-				head.prev = null;
-				temp = null;
-			}
+    public void deleteAtBegining() {
 
-		}
+        if (head == null) {
 
-	}
+            System.out.println("Empty List");
+        } else {
 
-	public void deleteAtPosition(int pos) {
+            Node temp = head;
+            head = temp.next;
 
-		try {
+            if (head == null) {
 
-			if (pos >= 0) {
+                tail = null;
+            } else {
 
-				if (pos == 0) {
+                head.prev = null;
+                temp = null;
+            }
 
-					deleteAtBegining();
-				} else {
+        }
 
-					Node temp = head;
-					Node prev = null;
+    }
 
-					for (int i = 1; i <= pos; i++) {
+    public void deleteAtPosition(int pos) {
 
-						prev = temp;
-						temp = temp.next;
-					}
+        try {
 
-					if (tail == temp) {
+            if (pos >= 0) {
 
-						prev.next = null;
-						tail = prev;
-					} else {
+                if (pos == 0) {
 
-						prev.next = temp.next;
-						temp.next.prev = prev;
-					}
-					temp = null;
-				}
+                    deleteAtBegining();
+                } else {
 
-			} else {
+                    Node temp = head;
+                    Node prev = null;
 
-				System.out.println("Invalid Position : " + pos);
-			}
+                    for (int i = 1; i <= pos; i++) {
 
-		} catch (Exception e) {
+                        prev = temp;
+                        temp = temp.next;
+                    }
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
+                    if (tail == temp) {
 
-	}
+                        prev.next = null;
+                        tail = prev;
+                    } else {
 
-	public void deleteAtLast() {
+                        prev.next = temp.next;
+                        temp.next.prev = prev;
+                    }
+                    temp = null;
+                }
 
-		if (tail == null) {
+            } else {
 
-			System.out.println("Empty List");
-		} else {
+                System.out.println("Invalid Position : " + pos);
+            }
 
-			Node temp = tail;
-			Node prev = temp.prev;
-			prev.next = null;
-			tail = prev;
+        } catch (Exception e) {
 
-		}
-	}
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
 
-	public void serach(T data) {
+    }
 
-		int i = -1;
-		int j = 0;
-		Node temp = head;
-		while (temp != null) {
+    public void deleteAtLast() {
 
-			if (temp.data.equals(data)) {
+        if (tail == null) {
 
-				i = j;
-			}
-			temp = temp.next;
-			j++;
-		}
+            System.out.println("Empty List");
+        } else {
 
-		System.out.println("Index : " + i);
+            Node temp = tail;
+            Node prev = temp.prev;
+            prev.next = null;
+            tail = prev;
 
-	}
+        }
+    }
 
-	public void get(int pos) {
+    public void serach(T data) {
 
-		try {
+        int i = -1;
+        int j = 0;
+        Node temp = head;
+        while (temp != null) {
 
-			Node temp = head;
-			T data = null;
-			if (pos >= 0) {
+            if (temp.data.equals(data)) {
 
-				if (pos == 0) {
+                i = j;
+            }
+            temp = temp.next;
+            j++;
+        }
 
-					data = temp.data;
-				} else {
+        System.out.println("Index : " + i);
 
-					for (int i = 1; i <= pos; i++) {
+    }
 
-						data = temp.data;
-						temp = temp.next;
+    public void get(int pos) {
 
-					}
-				}
-			}
+        try {
 
-			System.out.println("Data : " + data);
-		} catch (Exception e) {
+            Node temp = head;
+            T data = null;
+            if (pos >= 0) {
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
+                if (pos == 0) {
 
-	}
+                    data = temp.data;
+                } else {
 
-	public void update(int pos, T data) {
+                    for (int i = 1; i <= pos; i++) {
 
-		try {
+                        data = temp.data;
+                        temp = temp.next;
 
-			if (pos >= 0) {
+                    }
+                }
+            }
 
-				if (pos == 0) {
+            System.out.println("Data : " + data);
+        } catch (Exception e) {
 
-					head.data = data;
-				} else {
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
 
-					Node temp = head;
-					for (int i = 1; i <= pos; i++) {
+    }
 
-						if (i == pos) {
+    public void update(int pos, T data) {
 
-							temp.data = data;
-						}
+        try {
 
-						temp = temp.next;
-					}
-				}
-			} else {
+            if (pos >= 0) {
 
-				System.out.println("Invalid Position : " + pos);
-			}
+                if (pos == 0) {
 
-		} catch (Exception e) {
+                    head.data = data;
+                } else {
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
-	}
+                    Node temp = head;
+                    for (int i = 1; i <= pos; i++) {
 
-	public void contains(T data) {
+                        if (i == pos) {
 
-		boolean flag = false;
-		Node temp = head;
-		while (temp != null) {
+                            temp.data = data;
+                        }
+
+                        temp = temp.next;
+                    }
+                }
+            } else {
+
+                System.out.println("Invalid Position : " + pos);
+            }
+
+        } catch (Exception e) {
+
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
+    }
+
+    public void contains(T data) {
+
+        boolean flag = false;
+        Node temp = head;
+        while (temp != null) {
 
             if (temp.data.equals(data)) {
 
                 flag = true;
                 break;
             }
-			temp = temp.next;
-		}
+            temp = temp.next;
+        }
 
-		System.out.println("Contains : " + flag);
-	}
+        System.out.println("Contains : " + flag);
+    }
 
-	public void display() {
+    public void display() {
 
-		int i = 0;
-		Node temp = head;
-		System.out.print("Array : [ ");
-		while (temp != null) {
+        int i = 0;
+        Node temp = head;
+        System.out.print("Array : [ ");
+        while (temp != null) {
 
-			if (i == 0) {
+            if (i == 0) {
 
-				System.out.print("Node(" + temp.prev + ", " + temp.data + ", " + temp.next + ")");
-			} else {
+                System.out.print("Node(" + temp.prev + ", " + temp.data + ", " + temp.next + ")");
+            } else {
 
-				System.out.print(", " + "Node(" + temp.prev + ", " + temp.data + ", " + temp.next + ")");
-			}
-			temp = temp.next;
-			i++;
-		}
-		System.out.println(" ]");
-	}
+                System.out.print(", " + "Node(" + temp.prev + ", " + temp.data + ", " + temp.next + ")");
+            }
+            temp = temp.next;
+            i++;
+        }
+        System.out.println(" ]");
+    }
 
-	public void displayReverse() {
+    public void displayReverse() {
 
-		int i = 0;
-		Node temp = tail;
-		System.out.print("Array : [ ");
-		while (temp != null) {
+        int i = 0;
+        Node temp = tail;
+        System.out.print("Array : [ ");
+        while (temp != null) {
 
-			if (i == 0) {
+            if (i == 0) {
 
-				System.out.print("Node(" + temp.next + ", " + temp.data + ", " + temp.prev + ")");
-			} else {
+                System.out.print("Node(" + temp.next + ", " + temp.data + ", " + temp.prev + ")");
+            } else {
 
-				System.out.print(", " + "Node(" + temp.next + ", " + temp.data + ", " + temp.prev + ")");
-			}
-			temp = temp.prev;
-			i++;
-		}
-		System.out.println(" ]");
-	}
+                System.out.print(", " + "Node(" + temp.next + ", " + temp.data + ", " + temp.prev + ")");
+            }
+            temp = temp.prev;
+            i++;
+        }
+        System.out.println(" ]");
+    }
 
-	public void size() {
+    public void size() {
 
-		int i = 0;
-		Node temp = head;
-		while (temp != null) {
+        int i = 0;
+        Node temp = head;
+        while (temp != null) {
 
-			temp = temp.next;
-			i++;
-		}
-		System.out.println("Size : " + i);
-	}
+            temp = temp.next;
+            i++;
+        }
+        System.out.println("Size : " + i);
+    }
 
-	public void clear() {
+    public void clear() {
 
-		head = null;
-		tail = null;
-	}
+        head = null;
+        tail = null;
+    }
 
-	public void reverse() {
+    public void reverse() {
 
-		Node prev = null;
-		Node current = head;
+        Node prev = null;
+        Node current = head;
 
-		if (head == null) {
+        if (head == null) {
 
-			System.out.println("Empty List");
-		} else {
+            System.out.println("Empty List");
+        } else {
 
-			Node next = head.next;
-			int count = 0;
-			while (current != null) {
+            Node next = head.next;
+            int count = 0;
+            while (current != null) {
 
-				prev = current.prev;
-				next = current.next;
-				current.prev = next;
-				current.next = prev;
-				if (count == 0) {
+                prev = current.prev;
+                next = current.next;
+                current.prev = next;
+                current.next = prev;
+                if (count == 0) {
 
-					tail = current;
-				}
-				prev = current;
-				current = next;
-				count++;
-			}
+                    tail = current;
+                }
+                prev = current;
+                current = next;
+                count++;
+            }
 
-			head = prev;
-		}
+            head = prev;
+        }
 
-	}
+    }
 
-	@Override
-	public Iterator<T> iterator() {
+    @Override
+    public Iterator<T> iterator() {
 
-		return new Iterator<>() {
+        return new Iterator<>() {
 
             Node temp = head;
 
@@ -404,32 +415,21 @@ public class DoublyLinkedListDS<T> implements Iterable<T> {
                 return val;
             }
         };
-	}
+    }
 
-	public static void main(String[] args) {
+    class Node {
 
-		DoublyLinkedListDS<String> linList = new DoublyLinkedListDS<String>();
-		linList.insertAtBegining("Vedha1");
-		linList.insertAtLast("Vedha2");
-		linList.insertAtBegining("Vedha");
+        T data;
+        Node next;
+        Node prev;
 
-		linList.display();
+        public Node(T val) {
 
-		linList.reverse();
+            data = val;
+            next = null;
+            prev = null;
 
-		linList.display();
-
-		linList.displayReverse();
-
-		linList.display();
-
-		linList.reverse();
-
-		linList.display();
-
-		linList.size();
-		linList.contains("Vedha5");
-
-	}
+        }
+    }
 
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.lists;
 
@@ -25,270 +25,270 @@ import java.util.Iterator;
 
 class DynamicArray<T> implements Iterable<T> { // Iterable -> for-each
 
-	private T[] arr;
-	private int size, capacity;
-	private static final int initialCapacity = 4;
+    private static final int initialCapacity = 4;
+    private T[] arr;
+    private int size, capacity;
 
-	@SuppressWarnings("unchecked")
-	public DynamicArray() {
+    @SuppressWarnings("unchecked")
+    public DynamicArray() {
 
-		size = 0; // To Track The Size Of Array
-		arr = (T[]) new Object[initialCapacity]; // Initial Size
-		capacity = initialCapacity; // Current Size
-	}
+        size = 0; // To Track The Size Of Array
+        arr = (T[]) new Object[initialCapacity]; // Initial Size
+        capacity = initialCapacity; // Current Size
+    }
 
-	public void add(T data) {
+    public void add(T data) {
 
-		extendArray();
-		arr[size] = data;
-		size++;
+        extendArray();
+        arr[size] = data;
+        size++;
 
-	}
+    }
 
-	public void display() {
+    public void display() {
 
-		if (size > 0) {
+        if (size > 0) {
 
-			System.out.print("Array : [ ");
-			for (int i = 0; i < size; i++) {
+            System.out.print("Array : [ ");
+            for (int i = 0; i < size; i++) {
 
-				if (i == 0) {
+                if (i == 0) {
 
-					System.out.print(arr[i]);
-				} else {
+                    System.out.print(arr[i]);
+                } else {
 
-					System.out.print(", " + arr[i]);
-				}
-			}
-			System.out.println(" ]");
-		} else {
+                    System.out.print(", " + arr[i]);
+                }
+            }
+            System.out.println(" ]");
+        } else {
 
-			System.out.println("no data");
-		}
+            System.out.println("no data");
+        }
 
-	}
+    }
 
-	public void insertAtPos(int pos, T data) {
+    public void insertAtPos(int pos, T data) {
 
-		if (pos >= 0 && pos <= size) {
+        if (pos >= 0 && pos <= size) {
 
-			extendArray();
+            extendArray();
 
-			for (int i = size - 1; i >= pos; i--) {
+            for (int i = size - 1; i >= pos; i--) {
 
-				arr[i + 1] = arr[i];
-			}
-			arr[pos] = data;
-			size++;
-		} else {
+                arr[i + 1] = arr[i];
+            }
+            arr[pos] = data;
+            size++;
+        } else {
 
-			System.out.println("invalid position : " + pos);
-		}
+            System.out.println("invalid position : " + pos);
+        }
 
-	}
+    }
 
-	public void deleteAtPos(int pos) {
+    public void deleteAtPos(int pos) {
 
-		if (pos >= 0 && pos < size) {
+        if (pos >= 0 && pos < size) {
 
-			for (int i = pos + 1; i < size; i++) {
+            for (int i = pos + 1; i < size; i++) {
 
-				arr[i - 1] = arr[i];
-			}
-			size--;
-		} else {
+                arr[i - 1] = arr[i];
+            }
+            size--;
+        } else {
 
-			System.out.println("invalid position : " + pos);
-		}
+            System.out.println("invalid position : " + pos);
+        }
 
-		shrinkArray();
+        shrinkArray();
 
-	}
+    }
 
-	public void deleteAtEnd() {
+    public void deleteAtEnd() {
 
-		arr[size - 1] = null;
-		size--;
-	}
+        arr[size - 1] = null;
+        size--;
+    }
 
-	public void deleteAtBeginning() {
+    public void deleteAtBeginning() {
 
-		if (0 < size) {
+        if (0 < size) {
 
-			for (int i = 1; i < size; i++) {
+            for (int i = 1; i < size; i++) {
 
-				arr[i - 1] = arr[i];
-			}
+                arr[i - 1] = arr[i];
+            }
 
-			size--;
-		}
+            size--;
+        }
 
-		shrinkArray();
+        shrinkArray();
 
-	}
+    }
 
-	public void insertAtFirst(T data) {
+    public void insertAtFirst(T data) {
 
-		if (size >= 0) {
+        if (size >= 0) {
 
-			extendArray();
+            extendArray();
 
-			for (int i = size - 1; i >= 0; i--) {
+            for (int i = size - 1; i >= 0; i--) {
 
-				arr[i + 1] = arr[i];
-			}
-			arr[0] = data;
-			size++;
-		}
-	}
+                arr[i + 1] = arr[i];
+            }
+            arr[0] = data;
+            size++;
+        }
+    }
 
-	public void get(int pos) {
+    public void get(int pos) {
 
-		if (pos >= 0 && pos < size) {
+        if (pos >= 0 && pos < size) {
 
-			System.out.println(arr[pos]);
-		} else {
+            System.out.println(arr[pos]);
+        } else {
 
-			System.out.println("invalid position : " + pos);
-		}
-	}
+            System.out.println("invalid position : " + pos);
+        }
+    }
 
-	public void update(int pos, T data) {
+    public void update(int pos, T data) {
 
-		if (pos >= 0 && pos < size) {
+        if (pos >= 0 && pos < size) {
 
-			arr[pos] = data;
-		} else {
+            arr[pos] = data;
+        } else {
 
-			System.out.println("invalid position : " + pos);
-		}
-	}
+            System.out.println("invalid position : " + pos);
+        }
+    }
 
-	public void search(T data) {
+    public void search(T data) {
 
-		int pos = -1;
-		for (int i = 0; i < size; i++) {
+        int pos = -1;
+        for (int i = 0; i < size; i++) {
 
-			if (data.equals(arr[i])) {
+            if (data.equals(arr[i])) {
 
-				pos = i;
-			}
-		}
+                pos = i;
+            }
+        }
 
-		System.out.println("position : " + pos);
-	}
+        System.out.println("position : " + pos);
+    }
 
-	public void contains(T data) {
+    public void contains(T data) {
 
-		boolean flag = false;
-		for (int i = 0; i < size; i++) {
+        boolean flag = false;
+        for (int i = 0; i < size; i++) {
 
             if (data.equals(arr[i])) {
 
                 flag = true;
                 break;
             }
-		}
+        }
 
-		System.out.println("contains : " + flag);
-	}
+        System.out.println("contains : " + flag);
+    }
 
-	public void clear() {
+    public void clear() {
 
-		size = 0;
-		shrinkArray();
-		System.out.println("Array cleared");
-	}
+        size = 0;
+        shrinkArray();
+        System.out.println("Array cleared");
+    }
 
-	public void capacity() {
+    public void capacity() {
 
-		System.out.println("capacity : " + capacity);
-	}
+        System.out.println("capacity : " + capacity);
+    }
 
-	public void size() {
+    public void size() {
 
-		System.out.println("current insert position(starts at 0) : " + size);
-	}
+        System.out.println("current insert position(starts at 0) : " + size);
+    }
 
-	private void extendArray() {
+    private void extendArray() {
 
-		if (size == capacity) {
+        if (size == capacity) {
 
-			capacity *= 2;
-			arr = Arrays.copyOf(arr, capacity);
-		}
+            capacity *= 2;
+            arr = Arrays.copyOf(arr, capacity);
+        }
 
-	}
+    }
 
-	private void shrinkArray() {
+    private void shrinkArray() {
 
-		if (capacity > initialCapacity && capacity > size * 2) {
+        if (capacity > initialCapacity && capacity > size * 2) {
 
-			capacity /= 2;
-			arr = Arrays.copyOf(arr, capacity);
-		}
-	}
+            capacity /= 2;
+            arr = Arrays.copyOf(arr, capacity);
+        }
+    }
 
-	// for-each and iterator
-	@Override
-	public Iterator<T> iterator() {
+    // for-each and iterator
+    @Override
+    public Iterator<T> iterator() {
 
-		return new Iterator<T>() {
+        return new Iterator<T>() {
 
-			int index = 0;
+            int index = 0;
 
-			@Override
-			public boolean hasNext() {
+            @Override
+            public boolean hasNext() {
 
                 return index < size;
-			}
+            }
 
-			@Override
-			public T next() {
+            @Override
+            public T next() {
 
-				return arr[index++];
-			}
-		};
-	}
+                return arr[index++];
+            }
+        };
+    }
 
 }
 
 public class ArrayListDS {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		DynamicArray<String> array = new DynamicArray<String>();
-		array.add("vedha");
-		array.add("leo");
+        DynamicArray<String> array = new DynamicArray<String>();
+        array.add("vedha");
+        array.add("leo");
 
-		array.update(1, "Leo Das");
+        array.update(1, "Leo Das");
 
-		array.insertAtPos(0, "Master");
+        array.insertAtPos(0, "Master");
 
-		array.insertAtFirst("Vedha Da");
+        array.insertAtFirst("Vedha Da");
 
-		array.insertAtFirst("Test");
+        array.insertAtFirst("Test");
 
-		array.deleteAtBeginning();
+        array.deleteAtBeginning();
 
-		array.deleteAtEnd();
+        array.deleteAtEnd();
 
-		array.display();
+        array.display();
 
         for (String string : array) {
             System.out.println(string);
         }
 
-		array.contains("vedha");
+        array.contains("vedha");
 
-		array.get(0);
+        array.get(0);
 
-		array.search("Master");
+        array.search("Master");
 
-		// Using Iterator
-		for (String string : array) {
+        // Using Iterator
+        for (String string : array) {
 
-			System.out.println(string);
-		}
-	}
+            System.out.println(string);
+        }
+    }
 }

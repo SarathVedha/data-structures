@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.queues;
 
@@ -9,92 +9,92 @@ package com.vedha.queues;
  */
 public class LinkedListQueueDS<T> {
 
-	Node head;
-	Node tail;
+    Node head;
+    Node tail;
 
-	public LinkedListQueueDS() {
+    public LinkedListQueueDS() {
 
-		head = null;
-		tail = null;
-	}
+        head = null;
+        tail = null;
+    }
 
-	class Node {
+    public static void main(String[] args) {
 
-		T data;
-		Node next;
+        LinkedListQueueDS<String> linkedListQueueDS = new LinkedListQueueDS<>();
+        linkedListQueueDS.enQueue("Vedha");
+        linkedListQueueDS.enQueue("Vedha1");
+        linkedListQueueDS.enQueue("Vedha2");
+        linkedListQueueDS.display();
+        linkedListQueueDS.deQueue();
+        linkedListQueueDS.display();
+        linkedListQueueDS.deQueue();
+        linkedListQueueDS.deQueue();
+        linkedListQueueDS.display();
+        linkedListQueueDS.enQueue("Vedha Da");
+        linkedListQueueDS.display();
+        linkedListQueueDS.deQueue();
+    }
 
-		public Node(T val) {
+    public void enQueue(T data) {
 
-			data = val;
-			next = null;
+        Node newNode = new Node(data);
 
-		}
-	}
+        if (head == null) {
 
-	public void enQueue(T data) {
-
-		Node newNode = new Node(data);
-
-		if (head == null) {
-
-			head = newNode;
+            head = newNode;
         } else {
 
-			tail.next = newNode;
+            tail.next = newNode;
         }
         tail = newNode;
     }
 
-	public void deQueue() {
+    public void deQueue() {
 
-		if (head == null) {
+        if (head == null) {
 
-			System.out.println("Empty List!!");
-		} else {
+            System.out.println("Empty List!!");
+        } else {
 
-			T data = head.data;
-			System.out.println(data);
-			head = head.next;
+            T data = head.data;
+            System.out.println(data);
+            head = head.next;
 
-		}
-	}
+        }
+    }
 
-	public void display() {
+    public void display() {
 
-		int i = 0;
-		Node temp = head;
-		System.out.print("Array : [ ");
-		while (temp != null) {
+        int i = 0;
+        Node temp = head;
+        System.out.print("Array : [ ");
+        while (temp != null) {
 
-			if (i == 0) {
+            if (i == 0) {
 
-				System.out.print("Node(" + temp.data + ", " + temp.next + ")");
-			} else {
+                System.out.print("Node(" + temp.data + ", " + temp.next + ")");
+            } else {
 
-				System.out.print(", " + "Node(" + temp.data + ", " + temp.next + ")");
-			}
-			temp = temp.next;
-			i++;
-		}
-		System.out.println(" ]");
+                System.out.print(", " + "Node(" + temp.data + ", " + temp.next + ")");
+            }
+            temp = temp.next;
+            i++;
+        }
+        System.out.println(" ]");
 
-	}
+    }
 
-	public static void main(String[] args) {
+    class Node {
 
-		LinkedListQueueDS<String> linkedListQueueDS = new LinkedListQueueDS<>();
-		linkedListQueueDS.enQueue("Vedha");
-		linkedListQueueDS.enQueue("Vedha1");
-		linkedListQueueDS.enQueue("Vedha2");
-		linkedListQueueDS.display();
-		linkedListQueueDS.deQueue();
-		linkedListQueueDS.display();
-		linkedListQueueDS.deQueue();
-		linkedListQueueDS.deQueue();
-		linkedListQueueDS.display();
-		linkedListQueueDS.enQueue("Vedha Da");
-		linkedListQueueDS.display();
-		linkedListQueueDS.deQueue();
-	}
+        T data;
+        Node next;
+
+        public Node(T val) {
+
+            data = val;
+            next = null;
+
+        }
+    }
 
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.stacks;
 
@@ -9,99 +9,93 @@ package com.vedha.stacks;
  */
 public class LinkedListStackDS<T> {
 
-	private Node head;
+    private Node head;
 
-	public LinkedListStackDS() {
+    public LinkedListStackDS() {
 
-		head = null;
-	}
+        head = null;
+    }
 
-	class Node {
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
 
-		T data;
-		Node next;
+        LinkedListStackDS<String> linkedListStackDS = new LinkedListStackDS<>();
+        linkedListStackDS.push("Vedha");
+        linkedListStackDS.push("Vedha2");
+        linkedListStackDS.push("Vedha3");
+        linkedListStackDS.peek();
+        linkedListStackDS.pop();
+        linkedListStackDS.peek();
+        System.out.println(linkedListStackDS.isEmpty());
+    }
 
-		public Node(T val) {
+    // Inserting at beginning for O(1) for constant time
+    private void insertAtBegining(T val) {
 
-			data = val;
-			next = null;
-		}
-	}
+        Node newNode = new Node(val);
+        if (head == null) {
 
-	// Inserting at beginning for O(1) for constant time
-	private void insertAtBegining(T val) {
+            head = newNode;
+        } else {
 
-		Node newNode = new Node(val);
-		if (head == null) {
+            newNode.next = head;
+            head = newNode;
+        }
+    }
 
-			head = newNode;
-		} else {
+    public void push(T val) { // add
 
-			newNode.next = head;
-			head = newNode;
-		}
-	}
+        insertAtBegining(val);
+    }
 
-	public void push(T val) { // add
+    public T pop() { // delete
 
-		insertAtBegining(val);
-	}
+        T data = null;
+        if (head == null) {
 
-	public T pop() { // delete
+            System.out.println("Empty Stack");
+            return data;
+        } else {
 
-		T data = null;
-		if (head == null) {
+            data = head.data;
+            head = head.next;
+            System.out.println(data);
+            return data;
+        }
+    }
 
-			System.out.println("Empty Stack");
-			return data;
-		} else {
+    public T peek() {
 
-			data = head.data;
-			head = head.next;
-			System.out.println(data);
-			return data;
-		}
-	}
+        T data = null;
+        if (head == null) {
 
-	public T peek() {
+            System.out.println("Empty Stack");
+            return null;
+        } else {
 
-		T data = null;
-		if (head == null) {
+            data = head.data;
+            System.out.println(data);
+            return data;
+        }
+    }
 
-			System.out.println("Empty Stack");
-			return null;
-		} else {
+    public boolean isEmpty() {
 
-			data = head.data;
-			System.out.println(data);
-			return data;
-		}
-	}
+        return head == null;
+    }
 
-	public boolean isEmpty() {
+    class Node {
 
-		if (head == null) {
+        T data;
+        Node next;
 
-			return true;
-		} else {
+        public Node(T val) {
 
-			return false;
-		}
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		LinkedListStackDS<String> linkedListStackDS = new LinkedListStackDS<>();
-		linkedListStackDS.push("Vedha");
-		linkedListStackDS.push("Vedha2");
-		linkedListStackDS.push("Vedha3");
-		linkedListStackDS.peek();
-		linkedListStackDS.pop();
-		linkedListStackDS.peek();
-		System.out.println(linkedListStackDS.isEmpty());
-	}
+            data = val;
+            next = null;
+        }
+    }
 
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.lists;
 
@@ -11,312 +11,342 @@ import java.util.Iterator;
  */
 public class LinkedListDS<T> implements Iterable<T> {
 
-	Node head;
-	Node tail;
+    Node head;
+    Node tail;
+
+    public LinkedListDS() {
+
+        head = null;
+        tail = null;
+
+    }
+
+    public static void main(String[] args) {
+
+        LinkedListDS<String> linList = new LinkedListDS<String>();
+        linList.insertAtBegining("Vedha");
+        linList.insertAtBegining("Sarath");
+        linList.display();
+//		linList.serach("Vedha");
+        linList.insertAtPosition(2, "Master");
+//		linList.insertAtPosition(3, "Leo");
+        linList.display();
+//		linList.size();
+        linList.deleteAtPosition(2);
+        linList.display();
+        linList.add("Leo");
+        linList.display();
+        linList.deleteAtBegining();
+        linList.deleteAtBegining();
+        linList.display();
+//		linList.add("Vedha Da");
+        linList.deleteAtBegining();
+        linList.display();
+        linList.add("Vedha");
+        linList.display();
+        linList.insertAtPosition(1, "Hi");
+        linList.display();
+        linList.deleteAtPosition(1);
+        linList.display();
+        linList.add("Vedhaa");
+        linList.display();
+//		linList.contains("Leo");
+//		linList.update(3, "Leos");
+//		linList.display();
+//		linList.size();
+//		linList.get(2);
+//		//linList.clear();
+//		linList.reverse();
+//
+//		for (String string : linList) {
+//
+//			System.out.println(string);
+//		}
+    }
 
-	public LinkedListDS() {
+    public void add(T data) {
 
-		head = null;
-		tail = null;
+        if (head == null) {
 
-	}
+            insertAtBegining(data);
+        } else {
 
-	class Node {
+            Node newNode = new Node(data);
+            tail.next = newNode;
+            tail = newNode;
+        }
+    }
 
-		T data;
-		Node next;
+    public void insertAtBegining(T data) {
 
-		public Node(T val) {
+        Node newNode = new Node(data);
 
-			data = val;
-			next = null;
+        if (head == null) {
 
-		}
-	}
+            head = newNode;
+            tail = newNode;
+        } else {
 
-	public void add(T data) {
+            newNode.next = head;
+            head = newNode;
+        }
+    }
 
-		if (head == null) {
+    public void insertAtPosition(int pos, T data) {
 
-			insertAtBegining(data);
-		} else {
+        try {
 
-			Node newNode = new Node(data);
-			tail.next = newNode;
-			tail = newNode;
-		}
-	}
+            if (pos >= 0) {
 
-	public void insertAtBegining(T data) {
+                if (pos == 0) {
 
-		Node newNode = new Node(data);
+                    insertAtBegining(data);
+                } else {
 
-		if (head == null) {
+                    Node newNode = new Node(data);
+                    Node temp = head;
+                    for (int i = 1; i < pos; i++) {
 
-			head = newNode;
-			tail = newNode;
-		} else {
+                        temp = temp.next;
+                    }
 
-			newNode.next = head;
-			head = newNode;
-		}
-	}
+                    newNode.next = temp.next;
+                    temp.next = newNode;
 
-	public void insertAtPosition(int pos, T data) {
+                    if (temp == tail) {
 
-		try {
+                        tail = newNode;
+                    }
 
-			if (pos >= 0) {
+                }
 
-				if (pos == 0) {
+            } else {
 
-					insertAtBegining(data);
-				} else {
+                System.out.println("Invalid Position : " + pos);
+            }
+        } catch (Exception e) {
 
-					Node newNode = new Node(data);
-					Node temp = head;
-					for (int i = 1; i < pos; i++) {
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
 
-						temp = temp.next;
-					}
+    }
 
-					newNode.next = temp.next;
-					temp.next = newNode;
+    public void deleteAtBegining() {
 
-					if (temp == tail) {
+        if (head == null) {
 
-						tail = newNode;
-					}
+            System.out.println("Empty List");
+        } else {
 
-				}
+            Node temp = head;
+            head = temp.next;
 
-			} else {
+            if (head == null) {
 
-				System.out.println("Invalid Position : " + pos);
-			}
-		} catch (Exception e) {
+                tail = null;
+            }
+        }
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
+    }
 
-	}
+    public void deleteAtPosition(int pos) {
 
-	public void deleteAtBegining() {
+        try {
 
-		if (head == null) {
+            if (pos >= 0) {
 
-			System.out.println("Empty List");
-		} else {
+                if (pos == 0) {
 
-			Node temp = head;
-			head = temp.next;
+                    deleteAtBegining();
+                } else {
 
-			if (head == null) {
+                    Node temp = head;
+                    Node prev = null;
 
-				tail = null;
-			}
-		}
+                    for (int i = 1; i <= pos; i++) {
 
-	}
+                        prev = temp;
+                        temp = temp.next;
+                    }
 
-	public void deleteAtPosition(int pos) {
+                    prev.next = temp.next;
 
-		try {
+                    if (temp == tail) {
 
-			if (pos >= 0) {
+                        tail = prev;
+                    }
 
-				if (pos == 0) {
+                }
 
-					deleteAtBegining();
-				} else {
+            } else {
 
-					Node temp = head;
-					Node prev = null;
+                System.out.println("Invalid Position : " + pos);
+            }
 
-					for (int i = 1; i <= pos; i++) {
+        } catch (Exception e) {
 
-						prev = temp;
-						temp = temp.next;
-					}
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
 
-					prev.next = temp.next;
+    }
 
-					if (temp == tail) {
+    public void serach(T data) {
 
-						tail = prev;
-					}
+        int i = -1;
+        int j = 0;
+        Node temp = head;
+        while (temp != null) {
 
-				}
+            if (temp.data.equals(data)) {
 
-			} else {
+                i = j;
+            }
+            temp = temp.next;
+            j++;
+        }
 
-				System.out.println("Invalid Position : " + pos);
-			}
+        System.out.println("Index : " + i);
 
-		} catch (Exception e) {
+    }
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
+    public void get(int pos) {
 
-	}
+        try {
 
-	public void serach(T data) {
+            Node temp = head;
+            T data = null;
+            if (pos >= 0) {
 
-		int i = -1;
-		int j = 0;
-		Node temp = head;
-		while (temp != null) {
+                if (pos == 0) {
 
-			if (temp.data.equals(data)) {
+                    data = temp.data;
+                } else {
 
-				i = j;
-			}
-			temp = temp.next;
-			j++;
-		}
+                    for (int i = 1; i <= pos; i++) {
 
-		System.out.println("Index : " + i);
+                        data = temp.data;
+                        temp = temp.next;
 
-	}
+                    }
+                }
+            }
 
-	public void get(int pos) {
+            System.out.println("Data : " + data);
+        } catch (Exception e) {
 
-		try {
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
 
-			Node temp = head;
-			T data = null;
-			if (pos >= 0) {
+    }
 
-				if (pos == 0) {
+    public void update(int pos, T data) {
 
-					data = temp.data;
-				} else {
+        try {
 
-					for (int i = 1; i <= pos; i++) {
+            if (pos >= 0) {
 
-						data = temp.data;
-						temp = temp.next;
+                if (pos == 0) {
 
-					}
-				}
-			}
+                    head.data = data;
+                } else {
 
-			System.out.println("Data : " + data);
-		} catch (Exception e) {
+                    Node temp = head;
+                    for (int i = 1; i <= pos; i++) {
 
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
+                        if (i == pos) {
 
-	}
+                            temp.data = data;
+                        }
 
-	public void update(int pos, T data) {
+                        temp = temp.next;
+                    }
+                }
+            } else {
 
-		try {
+                System.out.println("Invalid Position : " + pos);
+            }
 
-			if (pos >= 0) {
+        } catch (Exception e) {
 
-				if (pos == 0) {
+            throw new IndexOutOfBoundsException("Invalid Position : " + pos);
+        }
+    }
 
-					head.data = data;
-				} else {
+    public void contains(T data) {
 
-					Node temp = head;
-					for (int i = 1; i <= pos; i++) {
-
-						if (i == pos) {
-
-							temp.data = data;
-						}
-
-						temp = temp.next;
-					}
-				}
-			} else {
-
-				System.out.println("Invalid Position : " + pos);
-			}
-
-		} catch (Exception e) {
-
-			throw new IndexOutOfBoundsException("Invalid Position : " + pos);
-		}
-	}
-
-	public void contains(T data) {
-
-		boolean flag = false;
-		Node temp = head;
-		while (temp != null) {
+        boolean flag = false;
+        Node temp = head;
+        while (temp != null) {
 
             if (temp.data.equals(data)) {
 
                 flag = true;
                 break;
             }
-			temp = temp.next;
-		}
+            temp = temp.next;
+        }
 
-		System.out.println("Contains : " + flag);
-	}
+        System.out.println("Contains : " + flag);
+    }
 
-	public void display() {
+    public void display() {
 
-		int i = 0;
-		Node temp = head;
-		System.out.print("Array : [ ");
-		while (temp != null) {
+        int i = 0;
+        Node temp = head;
+        System.out.print("Array : [ ");
+        while (temp != null) {
 
-			if (i == 0) {
+            if (i == 0) {
 
-				System.out.print("Node(" + temp.data + ", " + temp.next + ")");
-			} else {
+                System.out.print("Node(" + temp.data + ", " + temp.next + ")");
+            } else {
 
-				System.out.print(", " + "Node(" + temp.data + ", " + temp.next + ")");
-			}
-			temp = temp.next;
-			i++;
-		}
-		System.out.println(" ]");
-	}
+                System.out.print(", " + "Node(" + temp.data + ", " + temp.next + ")");
+            }
+            temp = temp.next;
+            i++;
+        }
+        System.out.println(" ]");
+    }
 
-	public void size() {
+    public void size() {
 
-		int i = 0;
-		Node temp = head;
-		while (temp != null) {
+        int i = 0;
+        Node temp = head;
+        while (temp != null) {
 
-			temp = temp.next;
-			i++;
-		}
-		System.out.println("Size : " + i);
-	}
+            temp = temp.next;
+            i++;
+        }
+        System.out.println("Size : " + i);
+    }
 
-	public void clear() {
+    public void clear() {
 
-		head = null;
-	}
+        head = null;
+    }
 
-	public void reverse() {
+    public void reverse() {
 
-		Node prev = null;
-		Node current = head;
-		Node next = head.next;
+        Node prev = null;
+        Node current = head;
+        Node next = head.next;
 
-		while (current != null) {
+        while (current != null) {
 
-			next = current.next;
-			current.next = prev;
-			prev = current;
-			current = next;
-		}
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
 
-		head = prev;
-	}
+        head = prev;
+    }
 
-	@Override
-	public Iterator<T> iterator() {
+    @Override
+    public Iterator<T> iterator() {
 
-		return new Iterator<>() {
+        return new Iterator<>() {
 
             Node temp = head;
 
@@ -334,49 +364,19 @@ public class LinkedListDS<T> implements Iterable<T> {
                 return val;
             }
         };
-	}
+    }
 
-	public static void main(String[] args) {
+    class Node {
 
-		LinkedListDS<String> linList = new LinkedListDS<String>();
-		linList.insertAtBegining("Vedha");
-		linList.insertAtBegining("Sarath");
-		linList.display();
-//		linList.serach("Vedha");
-		linList.insertAtPosition(2, "Master");
-//		linList.insertAtPosition(3, "Leo");
-		linList.display();
-//		linList.size();
-		linList.deleteAtPosition(2);
-		linList.display();
-		linList.add("Leo");
-		linList.display();
-		linList.deleteAtBegining();
-		linList.deleteAtBegining();
-		linList.display();
-//		linList.add("Vedha Da");
-		linList.deleteAtBegining();
-		linList.display();
-		linList.add("Vedha");
-		linList.display();
-		linList.insertAtPosition(1, "Hi");
-		linList.display();
-		linList.deleteAtPosition(1);
-		linList.display();
-		linList.add("Vedhaa");
-		linList.display();
-//		linList.contains("Leo");
-//		linList.update(3, "Leos");
-//		linList.display();
-//		linList.size();
-//		linList.get(2);
-//		//linList.clear();
-//		linList.reverse();
-//
-//		for (String string : linList) {
-//
-//			System.out.println(string);
-//		}
-	}
+        T data;
+        Node next;
+
+        public Node(T val) {
+
+            data = val;
+            next = null;
+
+        }
+    }
 
 }

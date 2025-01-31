@@ -11,85 +11,23 @@ public class BinaryTreeDS<T> {
     */
 
     Node root;
+    /*
+     * Three Types Tree Traversals or Walk
+     * 1. PreOrder -> Root, Left, Right
+     * 2. InOrder -> Left, Root, Right
+     * 3. PostOrder -> Left, Right, Root
+     * By Using Recursion Calls.
+     * */
+    int preOrder;
+    int preOrderMethodCall;
+    int inOrder;
+    int inOrderMethodCall;
+    int postOrder;
+    int postOrderMethodCall;
 
     public BinaryTreeDS(T initialData) {
 
         this.root = new Node(initialData);
-    }
-
-    public class Node {
-
-        final T data;
-        Node left, right;
-
-        Node(T data) {
-
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
-    }
-
-    public void insertLeft(Node node, T data) {
-
-        node.left = new Node(data);
-    }
-
-    public void insertRight(Node node, T data) {
-
-        node.right = new Node(data);
-    }
-
-    /*
-    * Three Types Tree Traversals or Walk
-    * 1. PreOrder -> Root, Left, Right
-    * 2. Inorder -> Left, Root, Right
-    * 3. PostOrder -> Left, Right, Root
-    * By Using Recursion Calls.
-    * */
-    int preOrder;
-    int preOrderMethodCall;
-    public void preOrder(Node root) {
-
-        preOrderMethodCall++;
-        if (root != null) {
-
-            // PreOrder -> Root, Left, Right
-            System.out.print(root.data + " ");
-            preOrder(root.left);
-            preOrder(root.right);
-            preOrder++;
-        }
-    }
-
-    int inOrder;
-    int inOrderMethodCall;
-    public void inOrder(Node root) {
-
-        inOrderMethodCall++;
-        if (root != null) {
-
-            // Inorder -> Left, Root, Right
-            inOrder(root.left);
-            System.out.print(root.data + " ");
-            inOrder(root.right);
-            inOrder++;
-        }
-    }
-
-    int postOrder;
-    int postOrderMethodCall;
-    public void postOrder(Node root) {
-
-        postOrderMethodCall++;
-        if (root != null) {
-
-            // PostOrder -> Left, Right, Root
-            postOrder(root.left);
-            postOrder(root.right);
-            System.out.print(root.data + " ");
-            postOrder++;
-        }
     }
 
     public static void main(String[] args) {
@@ -114,5 +52,73 @@ public class BinaryTreeDS<T> {
         integerBinaryTreeDS.preOrder(integerBinaryTreeDS.root);
         System.out.print(",preOrder count: " + integerBinaryTreeDS.preOrder);
         System.out.println(",preOrderMethodCall count: " + integerBinaryTreeDS.preOrderMethodCall);
+
+        integerBinaryTreeDS.inOrder(integerBinaryTreeDS.root);
+        System.out.print(",inOrder count: " + integerBinaryTreeDS.inOrder);
+        System.out.println(",inOrderMethodCall count: " + integerBinaryTreeDS.inOrderMethodCall);
+
+
+    }
+
+    public void insertLeft(Node node, T data) {
+
+        node.left = new Node(data);
+    }
+
+    public void insertRight(Node node, T data) {
+
+        node.right = new Node(data);
+    }
+
+    public void preOrder(Node root) {
+
+        preOrderMethodCall++;
+        if (root != null) {
+
+            // PreOrder -> Root, Left, Right
+            System.out.print(root.data + " ");
+            preOrder(root.left);
+            preOrder(root.right);
+            preOrder++;
+        }
+    }
+
+    public void inOrder(Node root) {
+
+        inOrderMethodCall++;
+        if (root != null) {
+
+            // Inorder -> Left, Root, Right
+            inOrder(root.left);
+            System.out.print(root.data + " ");
+            inOrder(root.right);
+            inOrder++;
+        }
+    }
+
+    public void postOrder(Node root) {
+
+        postOrderMethodCall++;
+        if (root != null) {
+
+            // PostOrder -> Left, Right, Root
+            postOrder(root.left);
+            postOrder(root.right);
+            System.out.print(root.data + " ");
+            postOrder++;
+        }
+    }
+
+    public class Node {
+
+        final T data;
+        Node left, right;
+
+        Node(T data) {
+
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
     }
 }

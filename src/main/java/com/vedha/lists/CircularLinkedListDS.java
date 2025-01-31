@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.vedha.lists;
 
@@ -9,159 +9,159 @@ package com.vedha.lists;
  */
 public class CircularLinkedListDS<T> {
 
-	Node last;
+    Node last;
 
-	class Node {
+    public static void main(String[] args) {
 
-		T data;
-		Node next;
+        CircularLinkedListDS<String> circularLinkedListDS = new CircularLinkedListDS<>();
+        circularLinkedListDS.insertAtBegining("Vedha");
+        circularLinkedListDS.display();
+        circularLinkedListDS.insertAtBegining("Vedha2");
+        circularLinkedListDS.display();
+        circularLinkedListDS.insertAtLast("Vedha3");
+        circularLinkedListDS.display();
+        circularLinkedListDS.size();
+        circularLinkedListDS.deleteAtLast();
+        circularLinkedListDS.display();
 
-		public Node(T val) {
+    }
 
-			data = val;
-			next = null;
+    public void insertAtBegining(T val) {
 
-		}
+        Node newNode = new Node(val);
+        if (last == null) {
 
-	}
+            newNode.next = newNode;
+            last = newNode;
+        } else {
 
-	public void insertAtBegining(T val) {
+            newNode.next = last.next;
+            last.next = newNode;
+        }
+    }
 
-		Node newNode = new Node(val);
-		if (last == null) {
+    public void insertAtLast(T val) {
 
-			newNode.next = newNode;
-			last = newNode;
-		} else {
+        Node newNode = new Node(val);
+        if (last == null) {
 
-			newNode.next = last.next;
-			last.next = newNode;
-		}
-	}
+            newNode.next = newNode;
+            last = newNode;
+        } else {
 
-	public void insertAtLast(T val) {
+            newNode.next = last.next;
+            last.next = newNode;
+            last = newNode;
+        }
+    }
 
-		Node newNode = new Node(val);
-		if (last == null) {
+    public void deleteAtBegining() {
 
-			newNode.next = newNode;
-			last = newNode;
-		} else {
+        if (last != null) {
 
-			newNode.next = last.next;
-			last.next = newNode;
-			last = newNode;
-		}
-	}
+            if (last == last.next) {
 
-	public void deleteAtBegining() {
+                last = null;
+            } else {
 
-		if (last != null) {
+                Node first = last.next;
+                last.next = first.next;
+                first = null;
 
-			if (last == last.next) {
+                // last.next = last.next.next;
+            }
+        } else {
 
-				last = null;
-			} else {
+            System.out.println("Empty List");
+        }
+    }
 
-				Node first = last.next;
-				last.next = first.next;
-				first = null;
+    public void deleteAtLast() {
 
-				// last.next = last.next.next;
-			}
-		} else {
+        if (last != null) {
 
-			System.out.println("Empty List");
-		}
-	}
+            if (last == last.next) {
 
-	public void deleteAtLast() {
+                last = null;
+            } else {
 
-		if (last != null) {
+                Node temp = last.next;
+                while (temp.next != last) {
 
-			if (last == last.next) {
+                    temp = temp.next;
+                }
 
-				last = null;
-			} else {
+                temp.next = last.next;
+                last = temp;
+            }
+        } else {
 
-				Node temp = last.next;
-				while (temp.next != last) {
+            System.out.println("Empty List");
+        }
+    }
 
-					temp = temp.next;
-				}
+    public void size() {
 
-				temp.next = last.next;
-				last = temp;
-			}
-		} else {
+        if (last == null) {
 
-			System.out.println("Empty List");
-		}
-	}
+            System.out.println("Empty List");
+        } else {
 
-	public void size() {
+            Node temp = last.next;
+            int i = 0;
+            do {
 
-		if (last == null) {
+                temp = temp.next;
+                i++;
+            } while (temp != last.next);
+            System.out.println("Size : " + i);
+        }
+    }
 
-			System.out.println("Empty List");
-		} else {
+    public void display() {
 
-			Node temp = last.next;
-			int i = 0;
-			do {
+        if (last != null) {
 
-				temp = temp.next;
-				i++;
-			} while (temp != last.next);
-			System.out.println("Size : " + i);
-		}
-	}
+            Node temp = last.next;
+            int i = 0;
 
-	public void display() {
+            System.out.print("Array : [ ");
+            do {
 
-		if (last != null) {
+                if (temp != null) {
 
-			Node temp = last.next;
-			int i = 0;
+                    if (i == 0) {
 
-			System.out.print("Array : [ ");
-			do {
+                        System.out.print("Node(" + temp.data + ", " + temp.next + ")");
+                    } else {
 
-				if (temp != null) {
+                        System.out.print(", " + "Node(" + temp.data + ", " + temp.next + ")");
+                    }
+                    temp = temp.next;
+                    i++;
+                }
 
-					if (i == 0) {
+            } while (temp != last.next);
+            System.out.println(" ]");
+        } else {
 
-						System.out.print("Node(" + temp.data + ", " + temp.next + ")");
-					} else {
+            System.out.print("Array : [ ");
+            System.out.println(" ]");
+        }
+    }
 
-						System.out.print(", " + "Node(" + temp.data + ", " + temp.next + ")");
-					}
-					temp = temp.next;
-					i++;
-				}
+    class Node {
 
-			} while (temp != last.next);
-			System.out.println(" ]");
-		} else {
+        T data;
+        Node next;
 
-			System.out.print("Array : [ ");
-			System.out.println(" ]");
-		}
-	}
+        public Node(T val) {
 
-	public static void main(String[] args) {
+            data = val;
+            next = null;
 
-		CircularLinkedListDS<String> circularLinkedListDS = new CircularLinkedListDS<>();
-		circularLinkedListDS.insertAtBegining("Vedha");
-		circularLinkedListDS.display();
-		circularLinkedListDS.insertAtBegining("Vedha2");
-		circularLinkedListDS.display();
-		circularLinkedListDS.insertAtLast("Vedha3");
-		circularLinkedListDS.display();
-		circularLinkedListDS.size();
-		circularLinkedListDS.deleteAtLast();
-		circularLinkedListDS.display();
+        }
 
-	}
+    }
 
 }
